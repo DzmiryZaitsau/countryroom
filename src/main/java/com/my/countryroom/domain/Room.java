@@ -23,7 +23,7 @@ public class Room {
     private boolean lampIsOn;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "country_id")
-    Country country;
+    private Country country;
 
     public long getId()
     {

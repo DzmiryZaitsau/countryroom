@@ -23,7 +23,7 @@ public class Country
     private long id;
     private String name;
     @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    List<Room> rooms;
+    private List<Room> rooms;
 
     public long getId()
     {

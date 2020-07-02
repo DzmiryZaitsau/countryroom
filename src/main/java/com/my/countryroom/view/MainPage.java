@@ -1,6 +1,8 @@
 package com.my.countryroom.view;
 
-import com.my.countryroom.domain.Room;
+import com.my.countryroom.domain.dto.RoomDTO;
+import com.my.countryroom.mapper.AbstractRoomMapper;
+import com.my.countryroom.mapper.AbstractRoomMapperImpl;
 import com.my.countryroom.service.impl.RoomServiceImpl;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -11,14 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class MainPage extends VerticalLayout {
     @Autowired
     private final RoomServiceImpl roomServiceImpl;
-    private Grid<Room> gridRoom = new Grid<>(Room.class);
+    private final AbstractRoomMapper abstractRoomMapper = new AbstractRoomMapperImpl();
+    private Grid<RoomDTO> gridRoom = new Grid<>(RoomDTO.class);
 
 
     public MainPage(final RoomServiceImpl roomServiceImpl) {
         this.roomServiceImpl = roomServiceImpl;
         add(gridRoom);
-        gridRoom.removeColumnByKey("country");
-        gridRoom.setItems(this.roomServiceImpl.findAll());
+        gridRoom.setItems(abstractRoomMapper.toRoomDTO(this.roomServiceImpl.findAll()));
     }
 
 }
