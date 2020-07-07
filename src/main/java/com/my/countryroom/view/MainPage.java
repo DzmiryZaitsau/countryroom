@@ -45,5 +45,7 @@ public class MainPage extends VerticalLayout {
         add(toolbar, gridRoom, roomEditor);
         gridRoom.setItems(abstractRoomMapper.toRoomDTO(this.roomServiceImpl.findAll()));
         addNewRoom.addClickListener(e -> this.roomEditor.createRoom(new Room()));
+        gridRoom.asSingleSelect().addValueChangeListener(e ->
+                this.roomEditor.editRoom(e.getValue()));
     }
 }

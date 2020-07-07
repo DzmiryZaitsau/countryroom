@@ -25,6 +25,13 @@ public class Country
     @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Room> rooms;
 
+    public Country() { }
+
+    public Country(final long id, final String name) {
+       this.id=id;
+       this.name=name;
+    }
+
     public long getId()
     {
         return id;

@@ -7,6 +7,7 @@ public class RoomDTO {
     private long id;
     private String name;
     private boolean lampIsOn;
+    private long country_id;
     private String country;
 
     public long getId()
@@ -37,6 +38,16 @@ public class RoomDTO {
     public void setLampIsOn(final boolean lampIsOn)
     {
         this.lampIsOn = lampIsOn;
+    }
+
+    public long getCountry_id()
+    {
+        return country_id;
+    }
+
+    public void setCountry_id(final long country_id)
+    {
+        this.country_id = country_id;
     }
 
     public String getCountry()

@@ -2,6 +2,7 @@ package com.my.countryroom.components;
 
 import com.my.countryroom.domain.Country;
 import com.my.countryroom.domain.Room;
+import com.my.countryroom.domain.dto.RoomDTO;
 import com.my.countryroom.mapper.AbstractRoomMapper;
 import com.my.countryroom.mapper.AbstractRoomMapperImpl;
 import com.my.countryroom.service.impl.CountryServiceImpl;
@@ -30,7 +31,7 @@ public class RoomEditor extends VerticalLayout implements KeyNotifier
     private AbstractRoomMapper abstractRoomMapper = new AbstractRoomMapperImpl();
     private Room room;
     private List<Country> allCountry;
-    private TextField name = new TextField("", "Name");
+    private TextField name = new TextField("Name", "Name");
     private ComboBox<Country> country = new ComboBox<>("Select a Country");
     private Button save = new Button("Save");
     private Button delete = new Button("Delete");
@@ -94,6 +95,30 @@ public class RoomEditor extends VerticalLayout implements KeyNotifier
 
         name.focus();
 
+    }
+
+    public void editRoom(RoomDTO roomDTO)
+    {
+        if (roomDTO == null)
+        {
+            setVisible(false);
+            return;
+        }
+
+        if (roomDTO.getId() != 0)
+        {
+            this.room = roomService.findById(roomDTO.getId()).orElse(abstractRoomMapper.toRoom(roomDTO));
+        }
+        else
+        {
+            this.room = abstractRoomMapper.toRoom(roomDTO);
+        }
+
+        binder.setBean(this.room);
+
+        setVisible(true);
+
+        name.focus();
     }
 
 }
