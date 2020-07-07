@@ -6,6 +6,8 @@ import com.my.countryroom.service.RoomService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class RoomServiceImpl implements RoomService {
     final
@@ -23,9 +25,15 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public Room findById(final long id)
+    public Optional<Room> findById(final long id)
     {
-        return roomRepo.getOne(id);
+        return roomRepo.findById(id);
     }
+
+    @Override
+    public void save(final Room room) { roomRepo.save(room);}
+
+    @Override
+    public void delete(final Room room) { roomRepo.delete(room);}
 
 }
