@@ -10,6 +10,7 @@ import com.my.countryroom.service.impl.RoomServiceImpl;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyNotifier;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -33,6 +34,7 @@ public class RoomEditor extends VerticalLayout implements KeyNotifier
     private List<Country> allCountry;
     private TextField name = new TextField("Name", "Name");
     private ComboBox<Country> country = new ComboBox<>("Select a Country");
+    private final Checkbox lampIsOn = new Checkbox();
     private Button save = new Button("Save");
     private Button delete = new Button("Delete");
     private HorizontalLayout buttons = new HorizontalLayout(save, delete);
@@ -61,7 +63,7 @@ public class RoomEditor extends VerticalLayout implements KeyNotifier
         allCountry = this.countryServiceImpl.findAll();
         country.setItems(allCountry);
         country.setItemLabelGenerator(Country::getName);
-        add(name, buttons, country);
+        add(name, buttons, lampIsOn, country);
         binder.bindInstanceFields(this);
         setSpacing(true);
 
